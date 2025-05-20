@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+  <title>Find Food - Campus Food Finder</title>
+  <link rel="stylesheet" href="../src/css/styles.css">
+</head>
+<body>
+  <h1>Find Food</h1>
+
+  <div>
+    <label>Filter by Vegan:</label>
+    <input type="checkbox" id="veganFilter">
+  </div>
+
+  <div id="restaurantList"></div>
+
+  <canvas id="priceChart" width="400" height="200"></canvas>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="finder.html">Find Food</a>
+  </nav>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/annyang@2.6.1/dist/annyang.min.js"></script>
+
+  <!-- JS order matters: fetch.js first, then filters.js -->
+  <script src="../src/js/fetch.js"></script>
+  <script src="../src/js/filters.js"></script>
+  <script src="../src/js/charts.js"></script>
+</body>
+</html>

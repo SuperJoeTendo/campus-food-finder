@@ -20,6 +20,7 @@ Campus Food Finder is a web application built to help University of Maryland (UM
 ## 📘 Developer Manual
 
 This section explains how to install, run, and extend this app for future developers.
+"C:\Users\jbens\OneDrive\Desktop\campus-food-finder\docs\DeveloperManual.md"
 
 ### 🔧 Installation
 

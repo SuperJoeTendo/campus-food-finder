@@ -1,53 +1,50 @@
+// api/index.js
 import express from 'express';
-import fetch from 'node-fetch';
+import 'dotenv/config';
 import cors from 'cors';
-import dotenv from 'dotenv';
-
-dotenv.config();
+import fetch from 'node-fetch';
 
 const app = express();
-app.use(cors());
-app.use(express.json());
-
 const PORT = process.env.PORT || 3000;
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_KEY;
 
-const headers = {
-  apikey: SUPABASE_KEY,
-  Authorization: `Bearer ${SUPABASE_KEY}`,
-  'Content-Type': 'application/json',
-};
+app.use(cors());
 
-// ✅ GET all restaurants
 app.get('/api/restaurants', async (req, res) => {
-  try {
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/restaurants?select=*`, {
-      headers,
-    });
-    const data = await response.json();
-    res.json(data);
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch restaurants' });
-  }
+  const response = await fetch(`${SUPABASE_URL}/rest/v1/restaurants`, {
+    headers: {
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`
+    }
+  });
+  const data = await response.json();
+  res.json(data);
 });
 
-// ✅ POST a new restaurant
-app.post('/api/restaurants', async (req, res) => {
-  try {
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/restaurants`, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify(req.body),
-    });
-    const data = await response.json();
-    res.json(data);
-  } catch (err) {
-    res.status(500).json({ error: 'Failed to add restaurant' });
-  }
+app.get('/api/vegan', async (req, res) => {
+  const response = await fetch(`${SUPABASE_URL}/rest/v1/restaurants?vegan=eq.true`, {
+    headers: {
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`
+    }
+  });
+  const data = await response.json();
+  res.json(data);
+});
+
+app.get('/api/gluten-free', async (req, res) => {
+  const response = await fetch(`${SUPABASE_URL}/rest/v1/restaurants?gluten_free=eq.true`, {
+    headers: {
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`
+    }
+  });
+  const data = await response.json();
+  res.json(data);
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ API running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

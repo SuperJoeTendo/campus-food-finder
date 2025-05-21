@@ -1,3 +1,4 @@
+// src/js/charts.js
 function drawChart(restaurants) {
   const labels = restaurants.map(r => r.name);
   const prices = restaurants.map(r => r.price_level);
@@ -8,14 +9,16 @@ function drawChart(restaurants) {
     data: {
       labels,
       datasets: [{
-        label: 'Price Level (1–3)',
+        label: 'Price Level (1 = cheap, 3 = expensive)',
         data: prices,
-        backgroundColor: 'skyblue'
+        backgroundColor: '#1f77b4'
       }]
     },
     options: {
-      responsive: true
+      responsive: true,
+      scales: {
+        y: { beginAtZero: true, max: 3 }
+      }
     }
   });
 }
-  
